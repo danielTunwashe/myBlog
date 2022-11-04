@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ fullname }} - <strong>{{message}}</strong> Thank you.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+    <div class="container-fluid p-3">
+        <h2> Dashboard </h2>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            {{ current_user.fullname}}
+        </div>
+        <div class="card-body p-3">
+            <div class="container-fluid"> 
+                <div class="row">
+                    <div class="col-12">
+                    <p class="card-text ">
+                        <strong> Full-Name: </strong>{{ current_user.fullname}}<br/>
+                        <strong> Username: </strong>{{ current_user.username}}<br/>
+                        <strong> User Id: </strong>{{ current_user.id}}<br/>
+                        <strong> Email: </strong>{{ current_user.email}}<br/>
+                        <strong> About - Author: </strong>{{ current_user.about_author}}<br/>
+                        <strong> Date Joined </strong>{{ current_user.date_added}}<br/>
+                      </p>
+
+                            <a href="{{url_for('logout')}}" class="btn btn-secondary btn-sm">Logout</a>
+                            <a href="{{url_for('update', id=current_user.id)}}" class="btn btn-secondary btn-sm"> Update Profile </a>
+                            <a href="{{url_for('delete',id=current_user.id)}}" class="btn btn-danger btn-sm"> Delete Profile </a>   
+                            <br/> <br/>            
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <br/>
+      <div class="card">
+        <div class="card-header">
+            Update Profile
+        </div>
+        <div class="card-body">
+            <form action="{{url_for('dashboard')}}" method="POST">
+                {{form.hidden_tag()}}
+        
+                {{form.fullname.label(class="form-label")}}
+                {{form.fullname(class="form-control", value=name_to_update.fullname)}}
+        
+                {{form.username.label(class="form-label")}}
+                {{form.username(class="form-control", value=name_to_update.username)}}
+                
+                {{form.email.label(class="form-label")}}
+                {{form.email(class="form-control", value=name_to_update.email)}}
+        
+                {{form.about_author.label(class="form-label")}}
+                <textarea name="about_author" class="form-control" >{{name_to_update.about_author}}</textarea>
+                
+                <br/>
+                {{form.submit(class="btn btn-secondary btn-sm")}}
+        
+            </form>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='content') }}
+        </div>
+
+{% endblock %}

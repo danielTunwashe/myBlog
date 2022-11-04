@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<div class="container-fluid text-center p-4">
+    <h1>  Welcome to the Admin Panel </h1>
+    <h6> Here you can perform all admin specific functions </h6>
+</div>
+
+<div class="container-fluid pl-3 pt-3"> 
+    <h1> List of Users </h1>
+    {{username}}
+    <table class="table table-hover table-bordered table-striped">
+        {% for our_user in our_users %}
+            <tr>
+            <td>{{our_user.id}}. {{our_user.fullname}} - {{our_user.username}} - {{our_user.email}} - <a class="linkUpdate" href="{{url_for('update', id=our_user.id)}}"> Update </a> - <a class="linkUpdate" href="{{url_for('delete', id=our_user.id)}}"> Delete </a> </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<div class="container-fluid pl-3 pt-3"> 
+    <h1> Messages from the Users or Potential Users </h1>
+<table class="table table-hover table-bordered table-striped">
+    {% for our_complain in our_complains %}
+        <tr>
+        <td>{{our_complain.id}}. {{our_complain.firstname}} - {{our_complain.lastname}} </br> {{our_complain.complain | safe}} </br> <a class="linkUpdate" href="{{url_for('deleteComplain', id=our_complain.id)}}"> Delete </a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

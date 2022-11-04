@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ firstname }} - <strong>{{message}}</strong> Thank you.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<div class="container-fluid text-center p-5">
+  <h1> Contact </h1>
+</div>
+
+  <div class="card container">
+    <div class="card-body">
+      <h5 class="card-title">Contact Us</h5>
+      <div class="card-text">
+        <form method="POST" class="row g-3">
+          {{form.hidden_tag()}}
+          <div class="row g-3">
+            <div class="col">
+              {{form.firstname.label(class="form-label")}}
+              {{form.firstname(class="form-control")}}
+            </div>
+            <div class="col">
+              {{form.lastname.label(class="form-label")}}
+              {{form.lastname(class="form-control")}}
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-12">
+              {{form.complain.label(class="form-label")}}
+              {{form.complain(class="form-control",rows="10")}}
+            </br>
+            {{form.submit(class="btn btn-outline-primary")}}
+            </div>
+  
+          </div>
+        </form>
+        {{ ckeditor.load() }}
+      {{ ckeditor.config(name='complain') }}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+

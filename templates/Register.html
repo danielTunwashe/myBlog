@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ fullname }} - <strong>{{message}}</strong> Thank you.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+<div class="container-fluid pl-3 pt-3"> 
+     
+</div>
+
+{% if fullname %}
+    <h1> User - Added! </h1>
+    <br/>
+    <h3> List of Users Present </h3>
+    <br/> <br/> <br/>
+    <table class="table table-hover table-bordered table-striped">
+        {% for our_user in our_users %}
+            <tr>
+            <td>{{our_user.id}}. {{our_user.fullname}} - {{our_user.email}}  - <a class="linkUpdate" href="#"> Update </a> - <a class="linkUpdate" href="#"> Delete </a> </td>
+            </tr>
+        {% endfor %}
+        </table>
+{% else %}
+    <div class="container-fluid pl-3 pt-3"> 
+      <h1> Add a new User! </h1>
+      <br/>
+    </div>
+    <div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+        {{form.hidden_tag()}}
+
+        {{form.fullname.label(class="form-label")}}
+        {{form.fullname(class="form-control")}}
+
+        {{form.username.label(class="form-label")}}
+        {{form.username(class="form-control")}}
+
+        {{form.email.label(class="form-label")}}
+        {{form.email(class="form-control")}}
+
+        {{form.about_author.label(class="form-label")}}
+        {{form.about_author(class="form-control")}}
+
+        {{form.password_hash.label(class="form-label")}}
+        {{form.password_hash(class="form-control")}}
+
+        {{form.password_hash2.label(class="form-label")}}
+        {{form.password_hash2(class="form-control")}}
+        <br/>
+        {{form.submit(class="btn btn-secondary")}}
+
+    </form>
+    {{ ckeditor.load() }}
+    {{ ckeditor.config(name='content') }}
+</div>
+  
+
+{% endif %}
+
+{%endblock%}
+
+
