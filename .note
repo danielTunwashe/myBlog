@@ -1,0 +1,19 @@
+After activating your our virtual environment, we will need to open our project in a code editor so as to install Flask and other packages we need to run our project. In this lesson, we will make use of visual studio code. There are two ways to open visual studio code editor after setting up our project from the terminal.
+
+Type code . in the git bash terminal. Make sure your are still in your project working directory (ie) the new folder we just created which houses our virtual environment.   
+
+Open Visual studio code and then in visual studio code, locate and open the folder we just created.
+
+After successfully opening the visual studio code you need to type the below command to select a python interpreter for our project. A python interpreter helps in activating our virtual environment automatically whenever we visit our project. After typing this command wait for some seconds then lists of options will pop out after this happens, make sure you select "python select interpreter option" after selecting this option, another option will pop out again in this option, make sure you select the option having (Recommended).
+
+ctrl + shift + p
+
+After selecting our python interpreter, we need to install the following packages and this can be done via our Visual Studio terminal or Git bash terminal. Before installation, make sure you are in your project directory and your virtual environment is also activated.
+
+pip install Flask 
+pip install Flask-SQLAlchemy
+pip python-dotenv
+pip install Flask-WTF
+pip install Flask-Migrate
+
+fsf
